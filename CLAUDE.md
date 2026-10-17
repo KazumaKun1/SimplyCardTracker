@@ -58,7 +58,29 @@ This is **not** an expense tracker. The user never logs purchases. They open the
 ## Design tokens
 - iOS-flavored. Light theme is cream `#faf6f0` with white cards. Dark theme is black with warm gray cards.
 - Accent blue `#0065be` (light) / `#0091ff` (dark).
-- Spacing scale 4/8/12/16/24/32. Card radius 18, control radius 12. Minimum tap target 44px.
+- Spacing scale 4/8/12/16/24/32. Card radius 18, control radius 12. Minimum tap target 44px (the prototype's Tokens board says 48; undecided).
+- Source of truth: the prototype's `project/ds/simply/tokens.json` (read it with the Artifact `read` action on the prototype URL, paths `project/ds/simply/tokens.json` and `project/Tokens.dc.html`). Don't guess hex values; read them from there.
+- Theme lives in `lib/core/theme/app_theme.dart` as `lightTheme` and `darkTheme`: `ColorScheme.fromSeed(...)` plus `copyWith` overrides for the tokens. Widgets read `Theme.of(context).colorScheme`, never hardcoded hex.
+
+### Color mapping (light / dark)
+| Token | Flutter role | Light | Dark |
+|---|---|---|---|
+| surface | `surface` | `#faf6f0` | `#000000` |
+| surface-raised | `surfaceContainer` | `#ffffff` | `#232019` |
+| gray-tint (selected pill highlight) | `surfaceContainerHighest` | `#e8e8e9` | `#383631` |
+| ink | `onSurface` | `#000000` | `#ffffff` |
+| ink-secondary | `onSurfaceVariant` | `#707075` | `#8e8e93` |
+| separator | `outlineVariant` | `#e4e1dd` | `#323235` |
+| accent | `primary` | `#0065be` | `#0091ff` |
+| on-accent | `onPrimary` | `#ffffff` | `#ffffff` |
+| destructive | `error` | `#e30005` | `#ff4245` |
+
+- Dark-mode filled buttons use the deeper `#0065be` fill (white text only passes contrast on it), so override `FilledButtonThemeData` for dark. `#0091ff` is for tappable text and icons.
+- `green`, `amber`, `pink` and their tints (Paid, Due soon, chips) have no `ColorScheme` role. Put them in a `ThemeExtension` when the first chip needs them.
+- Other radii: chip 8, sheet 34, pill 999. Light-mode cards add a soft shadow (`0 1px 4px rgba(0,0,0,.06)`); dark cards use the warm fill alone.
+- Red is only for delete actions. Every color is paired with a word or sign, never color alone.
+- Ignore the prototype's "money in / money out" color usage (green +, ink −). That is transaction-style UI and does not belong in this app.
+- Verify the M3 `Card` default color (`surfaceContainerLow`) against `surfaceContainer` when the first card is built.
 
 ## Commands
 - Run: `flutter run`
