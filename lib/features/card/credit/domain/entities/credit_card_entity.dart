@@ -10,7 +10,7 @@ class CreditCardEntity extends CardEntity {
   const CreditCardEntity({
     required super.id,
     required super.cardName,
-    required super.lastFourDigits,
+    required String super.lastFourDigits,
     required super.currency,
     required this.creditLimitMinor,
     required this.availableCreditMinor,

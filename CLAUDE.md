@@ -6,7 +6,7 @@ Offline Flutter app for keeping track of debit, stored-value, and credit cards. 
 This is **not** an expense tracker. The user never logs purchases. They open the app occasionally (for example after getting a credit card bill, or after checking their bank app) and tell it what is currently true. Every feature should keep that low-friction, no-daily-habit, no-guilt spirit (the user is AuDHD). Do not add transaction logging, monthly in/out totals, "changed this month" deltas, streaks, reminders to log, or anything that implies a habit.
 
 ### Credit cards
-- Card facts: name, last four digits, credit limit, available limit, annual fee (yes/no).
+- Card facts: name, last four digits (required for credit cards), credit limit, available limit, annual fee (yes/no).
 - Credit limit and available limit are both typed by the user (a snapshot from the bank app). Neither is calculated from bills. Bills don't include recent swipes, and installment conversions keep occupying the limit, so a calculation would disagree with the bank app.
 - Each card has at most one **current bill**: amount due, due date, paid/unpaid. When the next statement arrives, the user overwrites it. The card shows its current unpaid bill.
 - No past-bills history and no "All Bills" screen. Deliberately dropped as noise. A possible later idea: "total paid since the card was created", only if the user asks for it.
@@ -15,6 +15,7 @@ This is **not** an expense tracker. The user never logs purchases. They open the
 
 ### Debit and stored-value cards (bank debit, train reload cards, amusement park cards)
 - One card type for all of these, with a label/icon to tell them apart (not built yet).
+- Last four digits are **optional** (many stored-value cards have none, and the user shouldn't invent digits).
 - The user taps the balance, edits it, confirms. The balance is a plain field on the card.
 - **No history.** History entries and the "Fix an update" screen were dropped entirely. If history is ever added, store only the **new amount and a timestamp** (plus an optional note) and derive the change from the previous entry, so editing or deleting can never leave numbers inconsistent.
 - Dashboard goal: total current money across all these cards (per currency), plus the number of cards.
@@ -49,6 +50,15 @@ This is **not** an expense tracker. The user never logs purchases. They open the
 - `Currency` is an enum (`php`, `usd`) with `code`, `symbol` and `decimals`. The conversion factor is `10^decimals` using integer math, never a hardcoded 100. Store the currency **code string** in the database, never the enum index. Supporting more countries later means growing this list or replacing it with a lookup table.
 - Parse and format money in one helper (`parseMinor` / `formatMinor`) with unit tests. Parse by rounding, never truncating (`1.15 * 100` is `114.99999999999999`). Handle `15`, `0.10`, `.5`, `15.`, grouping commas, empty and invalid input.
 - Never store full card numbers. Last four digits only.
+- `CardEntity.lastFourDigits` is a nullable `String` (keeps leading zeros). Exactly 4 digits when present. `CreditCardEntity` requires it (`required String super.lastFourDigits`); the UI shows `•••• 1234` only when it is non-null.
+
+## App shell and platform
+- Three tabs: Debit, Credit, Settings. `go_router` `StatefulShellRoute.indexedStack` in `lib/core/router/app_router.dart`; `AppShell` in `lib/core/widgets/app_shell.dart` draws the floating pill tab bar (sliding highlight) and the Add button. Add is context-dependent: it creates a credit or debit card depending on the tab (the card type is chosen once, at creation).
+- Portrait only, iPhone only. Locked in `main()` with `SystemChrome.setPreferredOrientations`, iPhone-only device family in Xcode, and the iPhone `Info.plist` orientations. Exclude tablets in Play Console at release. Foldables and large screens can ignore the lock, so `MaterialApp.router`'s `builder` centers everything in a `maxWidth: 500` column.
+- Fonts: leave `fontFamily` unset so iOS gets SF and Android gets Roboto. Text styles come from `textTheme` roles mapped to the tokens (not built yet); Dynamic Type scaling stays on.
+- Accessibility: any custom tappable (a `GestureDetector`) needs `Semantics` (`button`, `selected`, `label`, `onTap`, `excludeSemantics`). Material widgets already provide it.
+- Screens under the shell use `extendBody: true`, so scrollable content needs bottom padding for the tab bar and the Add button.
+- Theme, `main()` and router are created once at startup: use a hot restart (`R`), not hot reload, after changing them.
 
 ## Backup and restore (Google Drive)
 - Uses the hidden `drive.appdata` scope.

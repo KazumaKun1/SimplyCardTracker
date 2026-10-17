@@ -6,7 +6,7 @@ class DebitCardEntity extends CardEntity {
   const DebitCardEntity({
     required super.id,
     required super.cardName,
-    required super.lastFourDigits,
+    super.lastFourDigits,
     required super.currency,
     required this.currentAmountMinor,
   });
