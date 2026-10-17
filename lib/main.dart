@@ -9,7 +9,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: 'SimplyCardTracker', home: HomeScreen());
+    return const MaterialApp(title: 'Simply Card Tracker', home: HomeScreen());
   }
 }
 
