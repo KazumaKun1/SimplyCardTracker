@@ -68,27 +68,7 @@ class _PillTabBar extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              AnimatedAlign(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOutCubic,
-                alignment: Alignment(
-                  -1 + 2 * currentIndex / (_items.length - 1),
-                  0,
-                ),
-                child: FractionallySizedBox(
-                  widthFactor: 1 / _items.length,
-                  heightFactor: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: DecoratedBox(
-                      decoration: ShapeDecoration(
-                        color: scheme.surfaceContainerHighest,
-                        shape: const StadiumBorder(),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              _SlidingHighlight(currentIndex: currentIndex),
               Row(
                 children: [
                   for (final (index, spec) in _items.indexed)
@@ -102,6 +82,36 @@ class _PillTabBar extends StatelessWidget {
                 ],
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SlidingHighlight extends StatelessWidget {
+  const _SlidingHighlight({required this.currentIndex});
+
+  final int currentIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return AnimatedAlign(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOutCubic,
+      alignment: Alignment(-1 + 2 * currentIndex / (_items.length - 1), 0),
+      child: FractionallySizedBox(
+        widthFactor: 1 / _items.length,
+        heightFactor: 1,
+        child: Padding(
+          padding: const EdgeInsets.all(6),
+          child: DecoratedBox(
+            decoration: ShapeDecoration(
+              color: scheme.surfaceContainerHighest,
+              shape: const StadiumBorder(),
+            ),
           ),
         ),
       ),
