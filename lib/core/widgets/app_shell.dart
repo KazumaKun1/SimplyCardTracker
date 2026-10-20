@@ -17,9 +17,12 @@ class AppShell extends StatelessWidget {
         icon: const Icon(Icons.add),
         label: const Text('Add'),
       ),
-      bottomNavigationBar: _PillTabBar(
-        currentIndex: shell.currentIndex,
-        onTap: shell.goBranch,
+      bottomNavigationBar: MediaQuery.withClampedTextScaling(
+        maxScaleFactor: 1.3,
+        child: _PillTabBar(
+          currentIndex: shell.currentIndex,
+          onTap: shell.goBranch,
+        ),
       ),
     );
   }
@@ -150,7 +153,14 @@ class _TabItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(spec.icon, color: color),
-              Text(spec.label, style: TextStyle(color: color, fontSize: 12)),
+              FittedBox(
+                fit: .scaleDown,
+                child: Text(
+                  spec.label,
+                  style: TextStyle(color: color, fontSize: 12),
+                  maxLines: 1,
+                ),
+              ),
             ],
           ),
         ),
