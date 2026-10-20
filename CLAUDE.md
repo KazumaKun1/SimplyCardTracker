@@ -11,14 +11,14 @@ This is **not** an expense tracker. The user never logs purchases. They open the
 - Each card has at most one **current bill**: amount due, due date, paid/unpaid. When the next statement arrives, the user overwrites it. The card shows its current unpaid bill.
 - No past-bills history and no "All Bills" screen. Deliberately dropped as noise. A possible later idea: "total paid since the card was created", only if the user asks for it.
 - No promo/perk notes field.
-- Dashboard goals: total credit limit, total available limit, number of cards, number with no annual fee.
+- Tab summary goals (the summary at the top of the Credit tab, not a separate dashboard screen): total credit limit, total available limit, number of cards, number with no annual fee.
 
 ### Debit and stored-value cards (bank debit, train reload cards, amusement park cards)
 - One card type for all of these, with a label/icon to tell them apart (not built yet).
 - Last four digits are **optional** (many stored-value cards have none, and the user shouldn't invent digits).
 - The user taps the balance, edits it, confirms. The balance is a plain field on the card.
 - **No history.** History entries and the "Fix an update" screen were dropped entirely. If history is ever added, store only the **new amount and a timestamp** (plus an optional note) and derive the change from the previous entry, so editing or deleting can never leave numbers inconsistent.
-- Dashboard goal: total current money across all these cards (per currency), plus the number of cards.
+- Tab summary goal (the summary at the top of the Debit tab, not a separate dashboard screen): total current money across all these cards (per currency), plus the number of cards.
 
 ### Data model decisions
 - Totals are **per currency**. Never sum PHP and USD together.
