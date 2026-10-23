@@ -5,9 +5,18 @@ class DebitCardEntity extends CardEntity {
 
   const DebitCardEntity({
     required super.id,
-    required super.cardName,
+    super.bankName,
+    super.cardName,
+    super.network,
+    super.tier,
     super.lastFourDigits,
+    super.colorKey,
     required super.currency,
     required this.currentAmountMinor,
   });
+
+  @override
+  String getCardType() {
+    return 'Debit';
+  }
 }

@@ -9,12 +9,21 @@ class CreditCardEntity extends CardEntity {
 
   const CreditCardEntity({
     required super.id,
-    required super.cardName,
+    required super.bankName,
+    super.cardName,
     required String super.lastFourDigits,
+    super.network,
+    super.tier,
+    super.colorKey,
     required super.currency,
     required this.creditLimitMinor,
     required this.availableCreditMinor,
     required this.hasAnnualFee,
     this.currentBill,
   });
+
+  @override
+  String getCardType() {
+    return 'Credit';
+  }
 }
