@@ -12,7 +12,7 @@ class DebitScreen extends StatefulWidget {
 }
 
 class _DebitScreenState extends State<DebitScreen> {
-  int selectedCardIndex = 0;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,10 @@ class _DebitScreenState extends State<DebitScreen> {
         child: SingleChildScrollView(
           padding: const .only(bottom: 100.0),
           child: HorizontalCardContainer(
-            cardTypeLabel: 'Credit',
+            cardTypeLabel: 'Debit',
             cards: debitCards,
+            selectedIndex: selectedIndex,
+            onSelectedChanged: (index) => setState(() => selectedIndex = index),
             footerBuilder: (card) => DebitCard(entity: card),
           ),
         ),

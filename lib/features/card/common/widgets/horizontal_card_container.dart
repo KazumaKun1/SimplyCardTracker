@@ -6,55 +6,50 @@ import 'package:simplycardtracker/features/card/common/widgets/horizontal_card_c
 import 'package:simplycardtracker/features/card/common/widgets/no_cards_widget.dart';
 import 'package:simplycardtracker/features/card/common/widgets/page_dots.dart';
 
-class HorizontalCardContainer<T extends CardEntity> extends StatefulWidget {
+class HorizontalCardContainer<T extends CardEntity> extends StatelessWidget {
   const HorizontalCardContainer({
     super.key,
     required this.cardTypeLabel,
     required this.cards,
+    required this.selectedIndex,
+    required this.onSelectedChanged,
     required this.footerBuilder,
   });
 
   final String cardTypeLabel;
   final List<T> cards;
+  final int selectedIndex;
+  final ValueChanged<int> onSelectedChanged;
   final Widget Function(T card) footerBuilder;
 
   @override
-  State<HorizontalCardContainer<T>> createState() =>
-      _HorizontalCardContainerState<T>();
-}
-
-class _HorizontalCardContainerState<T extends CardEntity>
-    extends State<HorizontalCardContainer<T>> {
-  int selectedIndex = 0;
-
-  @override
   Widget build(BuildContext context) {
-    if (widget.cards.isEmpty) {
+    if (cards.isEmpty) {
       return NoCardsWidget(
         text:
-            'No ${widget.cardTypeLabel} Cards added. You can add a card by pressing "+" button below.',
+            'No $cardTypeLabel Cards added. You can add a card by pressing "+" button below.',
       );
     }
 
     return Column(
       children: [
         HorizontalCardCarousel(
-          numberOfItems: widget.cards.length,
+          numberOfItems: cards.length,
           selectedIndex: selectedIndex,
           onSelectedChanged: (index) {
             HapticFeedback.selectionClick();
-            setState(() => selectedIndex = index);
+            onSelectedChanged(index);
           },
           itemBuilder: (context, index) => BaseCard(
-            entity: widget.cards[index],
-            footer: widget.footerBuilder(widget.cards[index]),
+            entity: cards[index],
+            footer: footerBuilder(cards[index]),
             onTap: () async {
               await HapticFeedback.lightImpact();
-              debugPrint('tapped ${widget.cards[index].cardName}');
+              debugPrint('tapped ${cards[index].cardName}');
             },
           ),
         ),
-        PageDots(count: widget.cards.length, index: selectedIndex),
+        PageDots(count: cards.length, index: selectedIndex),
       ],
     );
   }
