@@ -12,15 +12,10 @@ class AppShell extends StatelessWidget {
       extendBody: true,
       body: shell,
       floatingActionButtonLocation: .endFloat,
-      floatingActionButton: SizedBox(
-        width: 72,
-        height: 72,
-        child: FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'Add',
-          shape: const CircleBorder(),
-          child: const Icon(Icons.add, size: 40),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Add',
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: MediaQuery.withClampedTextScaling(
         maxScaleFactor: 1.3,

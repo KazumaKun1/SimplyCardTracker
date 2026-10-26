@@ -15,15 +15,17 @@ class DebitCard extends StatelessWidget {
       crossAxisAlignment: .start,
       children: [
         Text('Balance', style: textTheme.bodyLarge),
-        Text(
-          entity.currency.format(entity.currentAmountMinor),
-          style: textTheme.displayMedium?.copyWith(fontWeight: .w600),
+        FittedBox(
+          fit: .scaleDown,
+          child: Text(
+            entity.currency.format(entity.currentAmountMinor),
+            style: textTheme.displayMedium?.copyWith(fontWeight: .w600),
+          ),
         ),
         if (entity.lastFourDigits case final lastFourDigits?
             when lastFourDigits.isNotEmpty)
           Text('** $lastFourDigits', style: textTheme.bodyLarge),
-        if (entity.network case final network?)
-          Text(network.label),
+        if (entity.network case final network?) Text(network.label),
         if (entity.tier case final tier? when tier.isNotEmpty) Text(tier),
       ],
     );
