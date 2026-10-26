@@ -11,11 +11,16 @@ class AppShell extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       body: shell,
-      floatingActionButtonLocation: .centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        icon: const Icon(Icons.add),
-        label: const Text('Add'),
+      floatingActionButtonLocation: .endFloat,
+      floatingActionButton: SizedBox(
+        width: 72,
+        height: 72,
+        child: FloatingActionButton(
+          onPressed: () {},
+          tooltip: 'Add',
+          shape: const CircleBorder(),
+          child: const Icon(Icons.add, size: 40),
+        ),
       ),
       bottomNavigationBar: MediaQuery.withClampedTextScaling(
         maxScaleFactor: 1.3,

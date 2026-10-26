@@ -19,11 +19,9 @@ final lightTheme = ThemeData(
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: Color(0xFF0065BE),
     foregroundColor: Colors.white,
-    shape: StadiumBorder(),
-    extendedPadding: EdgeInsets.symmetric(horizontal: 24),
-    extendedIconLabelSpacing: 12,
-    extendedSizeConstraints: BoxConstraints.tightFor(height: 64),
-    extendedTextStyle: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+    shape: StadiumBorder(),   // with equal width and height this draws a circle
+    sizeConstraints: BoxConstraints.tightFor(width: 64, height: 64),
+    iconSize: 32,
   ),
 );
 

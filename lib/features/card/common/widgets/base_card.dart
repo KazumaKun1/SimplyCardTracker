@@ -21,6 +21,7 @@ class BaseCard extends StatelessWidget {
 
     return _CardSurface(
       swatch: swatch,
+      useGradient: false,
       onTap: onTap,
       child: _WhiteForeground(
         child: Column(
@@ -45,11 +46,13 @@ class BaseCard extends StatelessWidget {
 class _CardSurface extends StatelessWidget {
   const _CardSurface({
     required this.swatch,
+    required this.useGradient,
     required this.onTap,
     required this.child,
   });
 
   final CardSwatch swatch;
+  final bool useGradient;
   final VoidCallback? onTap;
   final Widget child;
 
@@ -72,11 +75,13 @@ class _CardSurface extends StatelessWidget {
       ),
       child: Ink(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: .topLeft,
-            end: .bottomRight,
-            colors: [swatch.color.shade800, swatch.color.shade900],
-          ),
+          gradient: useGradient
+              ? LinearGradient(
+                  begin: .topLeft,
+                  end: .bottomRight,
+                  colors: [swatch.color.shade800, swatch.color.shade900],
+                )
+              : null,
         ),
         child: InkWell(
           onTap: onTap,
