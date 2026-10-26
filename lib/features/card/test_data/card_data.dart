@@ -13,7 +13,7 @@ final List<DebitCardEntity> debitCards = [
     network: Network.mastercard,
     currency: .usd,
     currentAmountMinor: 125000,
-    colorKey: CardSwatch.blue.name,
+    colorKey: CardSwatch.orange.name,
   ),
   DebitCardEntity(
     id: 'debit-2',
@@ -80,7 +80,7 @@ final List<CreditCardEntity> creditCards = [
     creditLimitMinor: 40000000,
     availableCreditMinor: 40000000,
     hasAnnualFee: false,
-    colorKey: CardSwatch.blue.name,
+    colorKey: CardSwatch.pink.name,
   ),
   CreditCardEntity(
     id: 'credit-3',
@@ -119,7 +119,7 @@ final List<CreditCardEntity> creditCards = [
     creditLimitMinor: 32000000,
     availableCreditMinor: 32000000,
     hasAnnualFee: false,
-    colorKey: CardSwatch.yellow.name,
+    colorKey: CardSwatch.purple.name,
   ),
   CreditCardEntity(
     id: 'credit-6',
@@ -132,6 +132,6 @@ final List<CreditCardEntity> creditCards = [
     creditLimitMinor: 32000000,
     availableCreditMinor: 32000000,
     hasAnnualFee: true,
-    colorKey: CardSwatch.blue.name,
+    colorKey: CardSwatch.teal.name,
   ),
 ];

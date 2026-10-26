@@ -7,7 +7,6 @@ enum CardSwatch {
   purple(Colors.purple),
   green(Colors.green),
   orange(Colors.orange),
-  yellow(Colors.yellow),
   pink(Colors.pink);
 
   const CardSwatch(this.color);
