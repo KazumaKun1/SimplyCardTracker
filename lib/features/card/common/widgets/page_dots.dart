@@ -21,13 +21,11 @@ class PageDots extends StatelessWidget {
           for (var i = 0; i < count; i++)
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              width: 8,
+              width: i == index ? 16 : 8,
               height: 8,
               decoration: BoxDecoration(
-                shape: .circle,
-                color: i == index
-                    ? scheme.onSurface
-                    : scheme.onSurfaceVariant.withValues(alpha: 0.35),
+                borderRadius: .circular(4),
+                color: i == index ? scheme.onSurface : scheme.onSurfaceVariant.withValues(alpha: 0.35),
               ),
             ),
         ],
