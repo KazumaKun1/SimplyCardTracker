@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simplycardtracker/core/extensions/formatting/currency_formatting.dart';
 import 'package:simplycardtracker/core/extensions/comparison/date_comparison.dart';
 import 'package:simplycardtracker/core/extensions/formatting/date_style_formatting.dart';
+import 'package:simplycardtracker/features/card/common/widgets/card_pill.dart';
 import 'package:simplycardtracker/features/card/credit/domain/entities/credit_card_entity.dart';
 
 class CreditCard extends StatelessWidget {
@@ -36,12 +37,9 @@ class CreditCard extends StatelessWidget {
                 when lastFourDigits.isNotEmpty)
               Text('•••• $lastFourDigits', style: textTheme.bodyLarge),
             if (!entity.hasAnnualFee)
-              Container(
-                padding: .fromLTRB(8, 3, 8, 3),
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: .circular(20),
-                ),
+              CardPill(
+                padding: const EdgeInsets.fromLTRB(8, 3, 8, 3),
+                radius: 20,
                 child: Row(
                   spacing: 5,
                   children: [

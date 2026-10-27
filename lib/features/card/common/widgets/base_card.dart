@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simplycardtracker/features/card/common/domain/entities/card_entity.dart';
 import 'package:simplycardtracker/features/card/common/widgets/card_pattern_painter.dart';
+import 'package:simplycardtracker/features/card/common/widgets/card_pill.dart';
 import 'package:simplycardtracker/features/card/common/widgets/card_swatch.dart';
 
 class BaseCard extends StatelessWidget {
@@ -135,12 +136,7 @@ class _CardType extends StatelessWidget {
   Widget build(BuildContext context) {
     final cardTextTheme = Theme.of(context).textTheme;
 
-    return Container(
-      padding: const .all(6),
-      decoration: BoxDecoration(
-        color: Colors.white24,
-        borderRadius: .circular(12.0),
-      ),
+    return CardPill(
       child: Text(
         type,
         style: cardTextTheme.labelLarge?.copyWith(fontWeight: .w600),
