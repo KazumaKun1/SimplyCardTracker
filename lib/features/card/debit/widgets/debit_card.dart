@@ -26,7 +26,6 @@ class DebitCard extends StatelessWidget {
             when lastFourDigits.isNotEmpty)
           Text('•••• $lastFourDigits', style: textTheme.bodyLarge),
         if (entity.network case final network?) Text(network.label),
-        if (entity.tier case final tier? when tier.isNotEmpty) Text(tier),
       ],
     );
   }
