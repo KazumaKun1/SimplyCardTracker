@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+const _fabTheme = FloatingActionButtonThemeData(
+  backgroundColor: Color(0xFF0065BE),
+  foregroundColor: Colors.white,
+  shape: StadiumBorder(),
+  sizeConstraints: .tightFor(width: 72, height: 72),
+  iconSize: 40,
+);
+
 final lightTheme = ThemeData(
   colorScheme:
       ColorScheme.fromSeed(
@@ -16,14 +24,8 @@ final lightTheme = ThemeData(
         outlineVariant: const Color(0xFFE4E1DD), // separator
         error: const Color(0xFFE30005), // destructive
       ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: Color(0xFF0065BE),
-    foregroundColor: Colors.white,
-    shape: StadiumBorder(),
-    extendedPadding: EdgeInsets.symmetric(horizontal: 24),
-    extendedIconLabelSpacing: 12,
-    extendedSizeConstraints: BoxConstraints.tightFor(height: 64),
-    extendedTextStyle: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+  floatingActionButtonTheme: _fabTheme.copyWith(
+    backgroundColor: const Color(0xFF007DDD),
   ),
 );
 
@@ -43,13 +45,9 @@ final darkTheme = ThemeData(
         outlineVariant: const Color(0xFF323235),
         error: const Color(0xFFFF4245),
       ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: Color(0xFF0065BE),
-    foregroundColor: Colors.white,
-    shape: StadiumBorder(side: BorderSide(color: Color(0xFF0091FF), width: 1)),
-    extendedPadding: EdgeInsets.symmetric(horizontal: 24),
-    extendedIconLabelSpacing: 12,
-    extendedSizeConstraints: BoxConstraints.tightFor(height: 64),
-    extendedTextStyle: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+  floatingActionButtonTheme: _fabTheme.copyWith(
+    shape: const StadiumBorder(
+      side: BorderSide(color: Color(0xFF0091FF), width: 1),
+    ),
   ),
 );

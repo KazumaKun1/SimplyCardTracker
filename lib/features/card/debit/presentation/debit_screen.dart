@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:simplycardtracker/features/card/common/widgets/horizontal_card_container.dart';
+import 'package:simplycardtracker/features/card/debit/widgets/debit_card.dart';
 
-class DebitScreen extends StatelessWidget {
+import 'package:simplycardtracker/features/card/test_data/card_data.dart';
+
+class DebitScreen extends StatefulWidget {
   const DebitScreen({super.key});
 
   @override
+  State<StatefulWidget> createState() => _DebitScreenState();
+}
+
+class _DebitScreenState extends State<DebitScreen> {
+  int selectedIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text("Debit Screen")));
+    return Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const .only(bottom: 100.0),
+          child: HorizontalCardContainer(
+            cardTypeLabel: 'Debit',
+            cards: debitCards,
+            selectedIndex: selectedIndex,
+            onSelectedChanged: (index) => setState(() => selectedIndex = index),
+            footerBuilder: (card) => DebitCard(entity: card),
+          ),
+        ),
+      ),
+    );
   }
 }
