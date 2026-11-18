@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:simplycardtracker/core/extensions/formatting/currency_formatting.dart';
 import 'package:simplycardtracker/features/card/debit/domain/entities/debit_card_entity.dart';
 

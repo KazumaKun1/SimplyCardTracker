@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class PageDots extends StatelessWidget {
   const PageDots({super.key, required this.count, required this.index});
