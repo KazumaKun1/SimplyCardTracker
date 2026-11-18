@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:simplycardtracker/features/card/common/domain/entities/card_entity.dart';
 import 'package:simplycardtracker/features/card/common/widgets/card_pattern_painter.dart';
 import 'package:simplycardtracker/features/card/common/widgets/card_pill.dart';

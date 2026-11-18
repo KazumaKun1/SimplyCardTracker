@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:simplycardtracker/core/extensions/formatting/currency_formatting.dart';
 import 'package:simplycardtracker/core/extensions/comparison/date_comparison.dart';
 import 'package:simplycardtracker/core/extensions/formatting/date_style_formatting.dart';
